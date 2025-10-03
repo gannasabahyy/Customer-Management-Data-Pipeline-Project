@@ -36,12 +36,12 @@ ConvertRecord Processor: Converts JSON to Parquet format
 
 PutHDFS Processor: Writes processed data to HDFS
 
-###2. Storage & Processing Layer
+### 2. Storage & Processing Layer
 HDFS: Distributed storage for raw and processed data
 Hive: Data warehousing and SQL-based processing
 Hue: Web interface for data exploration and query execution
 
-###3. Data Modeling
+### 3. Data Modeling
 The data warehouse uses a Star Schema with the following structure:
 
 Fact Tables
