@@ -1,58 +1,35 @@
-# Customer-Management-Data-Pipeline-Project
-# Customer Management & Analytics Data Platform
+# Customer Analytics & Churn Prediction Platform
 
-A comprehensive data engineering and business intelligence project that builds a modern data pipeline to analyze customer behavior, predict churn, and calculate customer lifetime value (CLV).
+A data engineering project that builds a complete data pipeline for customer behavior analysis and churn prediction.
 
-## 📊 Project Overview
+## 📊 Overview
 
-This project demonstrates the design and implementation of a complete data ecosystem - from raw data ingestion to actionable business insights. The system integrates multiple data sources (customer data, usage logs, transactions, offers, and support tickets) into a centralized data warehouse, enabling advanced customer analytics and churn prediction.
-
-**Business Goal:** Improve customer churn prediction and lifetime value (CLV) analysis while providing a single source of truth for customer reporting and dashboards.
+- **Business Problem:** 35% monthly customer churn rate requiring data-driven solutions
+- **Solution:** Built end-to-end data pipeline from ingestion to actionable insights
+- **Key Findings:** Identified high churn in young customers (18-29), critical support issues causing 100% churn, and CLV drivers
 
 ## 🏗️ Architecture
+Data Sources → Sqoop/NiFi → HDFS → Hive → Power BI
 
-The architecture follows a data lakehouse pattern combining raw data ingestion, structured warehousing, and analytics:
-Data Sources → Ingestion Layer → Storage Layer → Processing Layer → BI Layer
+**Technology Stack:** Sqoop, NiFi, HDFS, Hive, Hue, Power BI  
+**Data Model:** Star Schema with fact and dimension tables
 
-### Technology Stack
+## 📈 Key Insights
 
-- **Data Engineering:** Sqoop, NiFi, HDFS, Hive, Hue
-- **Business Intelligence:** Power BI Direct Query
-- **Data Modeling:** Star Schema / Fact Constellation
+- **35% monthly churn rate** - critical business emergency
+- **Young customers (18-29)** are churning at 100% in some regions
+- **High-severity support issues** (ATM failures, mobile token issues) cause 100% churn
+- **Savings & Cashback products** drive highest customer lifetime value
 
-## 📁 Data Pipeline Architecture
+## 🚀 Quick Start
 
-### 1. Data Ingestion Layer
+1. Ingest data: `sqoop import --connect jdbc:mysql://localhost/SIC --table customers`
+2. Create Hive tables (see `/sql/schema.sql`)
+3. Run analysis queries (see `/sql/analysis_queries.sql`)
+4. Connect Power BI for dashboards
 
-**Apache Sqoop:** Imports relational data from MariaDB into HDFS and Hive
-`bash
-sqoop import --connect jdbc:mysql://localhost/SIC --table customers --as-parquetfile --target-dir /warehouse/customers
-
-Apache NiFi: Ingests semi-structured/unstructured data (JSON) and pushes to HDFS
-
-GetFile Processor: Reads JSON files from local directory
-
-ConvertRecord Processor: Converts JSON to Parquet format
-
-PutHDFS Processor: Writes processed data to HDFS
-
-### 2. Storage & Processing Layer
-HDFS: Distributed storage for raw and processed data
-Hive: Data warehousing and SQL-based processing
-Hue: Web interface for data exploration and query execution
-
-### 3. Data Modeling
-The data warehouse uses a Star Schema with the following structure:
-
-Fact Tables
-fact_customer_activity - Detailed customer actions and interactions
-
-fact_customer_metrics - Customer-level performance metrics and KPIs
-Dimension Tables
-dim_customer - Customer demographics and attributes
-
-dim_usage - Product usage and engagement data
-
-dim_offer - Marketing campaigns and offers
-
-dim_support_ticket - Customer support interactions
+## 📁 Project Structure
+├── sql/ # Hive schema & analysis queries
+├── nifi/ # Data flow templates
+├── docs/ # Detailed documentation
+└── powerbi/ # Dashboard files
